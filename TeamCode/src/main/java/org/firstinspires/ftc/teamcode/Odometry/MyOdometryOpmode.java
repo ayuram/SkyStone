@@ -5,6 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.teamcode.Odometry.OdometryGlobalCoordinatePosition;
+
 /**
  * Created by Sarthak on 10/4/2019.
  */
@@ -56,6 +58,25 @@ public class MyOdometryOpmode extends LinearOpMode {
 
         //Stop the thread
         globalPositionUpdate.stop();
+
+    }
+
+    public void goToPosition(double targetXPosition, double targetYPosition, double robotPower, double desiredRobotOrientation, double allowabledistanceError){
+        double distanceToXTarget = targetXPosition - globalPositionUpdate.returnXCoordinate();
+        double distanceToYTarget = targetYPosition - globalPositionUpdate.returnYCoordinate();
+
+        double distance = Math.hypot(distanceToXTarget, distanceToYTarget);
+
+        while(opModeIsActive() && distance > allowabledistanceError){
+            distanceToXTarget = targetXPosition - globalPositionUpdate.returnXCoordinate();
+            distanceToYTarget = targetYPosition - globalPositionUpdate.returnYCoordinate();
+
+            double robotMovementAngle = Math.toDegrees(Math.atan2(distanceToXTarget, distanceToYTarget));
+
+            double robot_movement_x_component = calculateX(robotMovementAngle, robotPower);
+            double robot_movement_y_component = calculateY(robotMovementAngle, robotPower);
+            double pivotCorrection = desiredRobotOrientation - globalPositionUpdate.returnOrientation();
+        }
 
     }
 
