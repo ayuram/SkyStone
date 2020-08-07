@@ -42,6 +42,10 @@ public class MyOdometryOpmode extends LinearOpMode {
         globalPositionUpdate.reverseRightEncoder();
         globalPositionUpdate.reverseNormalEncoder();
 
+        goToPosition(0, 24, 0.5, 0, 1);
+        goToPosition(24, 24, 0.5, 0, 1);
+        goToPosition(0, 0, 0.5, 0, 1);
+
         while(opModeIsActive()){
             //Display Global (x, y, theta) coordinates
             telemetry.addData("X Position", globalPositionUpdate.returnXCoordinate() / COUNTS_PER_INCH);
@@ -61,13 +65,17 @@ public class MyOdometryOpmode extends LinearOpMode {
 
     }
 
-    public void goToPosition(double targetXPosition, double targetYPosition, double robotPower, double desiredRobotOrientation, double allowabledistanceError){
+    public void goToPosition(double _targetXPosition, double _targetYPosition, double robotPower, double desiredRobotOrientation, double _allowableDistanceError){
+        double targetXPosition = _targetXPosition * COUNTS_PER_INCH;
+        double targetYPosition = _targetYPosition * COUNTS_PER_INCH;
+        double allowableDistanceError = _allowableDistanceError * COUNTS_PER_INCH;
+
         double distanceToXTarget = targetXPosition - globalPositionUpdate.returnXCoordinate();
         double distanceToYTarget = targetYPosition - globalPositionUpdate.returnYCoordinate();
 
         double distance = Math.hypot(distanceToXTarget, distanceToYTarget);
 
-        while(opModeIsActive() && distance > allowabledistanceError){
+        while(opModeIsActive() && distance > allowableDistanceError){
             distanceToXTarget = targetXPosition - globalPositionUpdate.returnXCoordinate();
             distanceToYTarget = targetYPosition - globalPositionUpdate.returnYCoordinate();
 
