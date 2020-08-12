@@ -7,6 +7,8 @@ import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
 
 import java.io.File;
 
+import static org.firstinspires.ftc.teamcode.Robot.*;
+
 /**
  * Created by Sarthak on 6/1/2019.
  */
@@ -19,7 +21,6 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
 
     //Position variables used for storage and calculations
     double verticalRightEncoderWheelPosition = 0, verticalLeftEncoderWheelPosition = 0, normalEncoderWheelPosition = 0,  changeInRobotOrientation = 0;
-    private double robotGlobalXCoordinatePosition = 0, robotGlobalYCoordinatePosition = 0, robotOrientationRadians = 0;
     private double previousVerticalRightEncoderWheelPosition = 0, previousVerticalLeftEncoderWheelPosition = 0, prevNormalEncoderWheelPosition = 0;
 
     //Algorithm constants
@@ -68,7 +69,7 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
 
         //Calculate Angle
         changeInRobotOrientation = (leftChange - rightChange) / (robotEncoderWheelDistance);
-        robotOrientationRadians = ((robotOrientationRadians + changeInRobotOrientation));
+        worldAngle_rad = ((worldAngle_rad + changeInRobotOrientation));
 
         //Get the components of the motion
         normalEncoderWheelPosition = (horizontalEncoder.getCurrentPosition()*normalEncoderPositionMultiplier);
@@ -79,31 +80,14 @@ public class OdometryGlobalCoordinatePosition implements Runnable{
         double n = horizontalChange;
 
         //Calculate and update the position values
-        robotGlobalXCoordinatePosition = robotGlobalXCoordinatePosition + (p*Math.sin(robotOrientationRadians) + n*Math.cos(robotOrientationRadians));
-        robotGlobalYCoordinatePosition = robotGlobalYCoordinatePosition + (p*Math.cos(robotOrientationRadians) - n*Math.sin(robotOrientationRadians));
+        worldXPosition = worldXPosition + (p*Math.sin(worldAngle_rad) + n*Math.cos(worldAngle_rad));
+        worldYPosition = worldYPosition + (p*Math.cos(worldAngle_rad) - n*Math.sin(worldAngle_rad));
 
         previousVerticalLeftEncoderWheelPosition = verticalLeftEncoderWheelPosition;
         previousVerticalRightEncoderWheelPosition = verticalRightEncoderWheelPosition;
         prevNormalEncoderWheelPosition = normalEncoderWheelPosition;
     }
 
-    /**
-     * Returns the robot's global x coordinate
-     * @return global x coordinate
-     */
-    public double returnXCoordinate(){ return robotGlobalXCoordinatePosition; }
-
-    /**
-     * Returns the robot's global y coordinate
-     * @return global y coordinate
-     */
-    public double returnYCoordinate(){ return robotGlobalYCoordinatePosition; }
-
-    /**
-     * Returns the robot's global orientation
-     * @return global orientation, in degrees
-     */
-    public double returnOrientation(){ return Math.toDegrees(robotOrientationRadians) % 360; }
 
     /**
      * Stops the position update thread

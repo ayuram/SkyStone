@@ -1,12 +1,8 @@
 package org.firstinspires.ftc.teamcode.PurePursuit;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 public class MyOpmode extends OpMode {
-
-    static double movement_x;
-    static double movement_y;
 
     @Override
     public void init() {
@@ -15,7 +11,7 @@ public class MyOpmode extends OpMode {
 
     @Override
     public void loop() {
-        RobotMovement.goToPosition(24, 24, 0.5);
+        RobotMovement.goToPosition(24, 24, 0.5, 0, 0.5);
 
     }
 }
