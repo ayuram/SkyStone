@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.util.Range;
 import org.firstinspires.ftc.teamcode.Odometry.OdometryGlobalCoordinatePosition;
 
 import static org.firstinspires.ftc.teamcode.PurePursuit.MathFunctions.*;
-import static org.firstinspires.ftc.teamcode.Robot.*;
 import static org.firstinspires.ftc.teamcode.RobotUtilities.MovementVars.*;
+import static org.firstinspires.ftc.teamcode.company.Robot.*;
 
 public class RobotMovement {
 

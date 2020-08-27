@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode.PurePursuit;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-public class MyOpmode extends OpMode {
+public class MyOpMode extends OpMode {
 
     @Override
     public void init() {

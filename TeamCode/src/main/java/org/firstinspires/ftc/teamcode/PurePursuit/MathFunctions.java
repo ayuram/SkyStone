@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.PurePursuit;
 
-import org.firstinspires.ftc.teamcode.RobotUtilities.Point;
+import org.firstinspires.ftc.teamcode.core.Point;
 
 import java.util.ArrayList;
 
@@ -60,7 +60,7 @@ public class MathFunctions {
             xRoot2 += circleCenter.x;
             yRoot2 += circleCenter.y;
 
-            if(xRoot1 > minX && xRoot1 < maxX){
+            if(xRoot2 > minX && xRoot2 < maxX){
                 allPoints.add(new Point(xRoot2, yRoot2));
             }
         }
