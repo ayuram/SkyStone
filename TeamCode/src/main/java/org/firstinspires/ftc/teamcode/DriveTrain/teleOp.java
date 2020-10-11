@@ -5,10 +5,12 @@ public class teleOp extends Robot {
     public void start(){};
 
     public void loop(){
-        //drivetrain code
-        double x, y, turn, mag, angle, d1, d2;
         //flywheel variables
         double flySpeed = 0;
+
+        //drivetrain code
+        double x, y, turn, mag, angle, d1, d2;
+
         while(true){
             //input values
             x = gamepad1.left_stick_x;
