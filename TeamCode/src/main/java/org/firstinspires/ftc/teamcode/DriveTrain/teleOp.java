@@ -5,8 +5,7 @@ public class teleOp extends Robot {
     public void start(){};
 
     public void loop(){
-        //flywheel variables
-        double flySpeed = 0;
+       
 
         //drivetrain code
         double x, y, turn, mag, angle, d1, d2;
@@ -44,18 +43,6 @@ public class teleOp extends Robot {
             bl.setPower(d2);
             fr.setPower(d2);
 
-            if(gamepad1.left_trigger>0.1 && flySpeed<1){
-                flySpeed+=0.25;
-            }
-            else if(gamepad1.left_trigger>0.1 && flySpeed >= 1){
-                flySpeed = 1;
-            }
-            else if(gamepad1.left_trigger<0.1 && flySpeed >0){
-                flySpeed -= 0.25;
-            }
-            else{
-                flySpeed = 0;
-            }
         }
 
 
