@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.DriveTrain;
 
+@TeleOp(name="TanDrive", group = "IterativeOpMode")
 public class tanBasedDrive extends Robot {
 
     public void start(){};
