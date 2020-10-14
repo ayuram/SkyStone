@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.DriveTrain;
 
-public class teleOp extends Robot {
+public class tanBasedDrive extends Robot {
 
     public void start(){};
 
