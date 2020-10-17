@@ -12,7 +12,7 @@ public class flywheel extends LinearOpMode{
         flywheel = hardwareMap.get(DcMotor.class, "fw");
         flywheel.setDirection(DcMotor.Direction.FORWARD);
 
-        int accel = 0;
+
 
         telemetry.addData("Init", true);
         telemetry.update();
@@ -22,21 +22,16 @@ public class flywheel extends LinearOpMode{
 
         while(opModeIsActive()){
 
-            if(gamepad1.a==true && accel<1) accel += 0.05;
-
-            else{
-
-                if(gamepad1.a==true && accel>=1) accel = 1;
-
-                else if(accel>0 && gamepad1.a!=true) accel -= 0.05;
-
-                else if(accel<=0  && gamepad1.a!=true) accel=0;
-
+            if(gamepad1.right_trigger>0.1){
+                flywheel.setPower(1);
             }
-            flywheel.setPower(accel);
+            else{
+                flywheel.setPower(0);
+            }
 
-            telemetry.addData("Speed" , accel);
-            telemetry.update();
+
+
+
 
         }
     }
