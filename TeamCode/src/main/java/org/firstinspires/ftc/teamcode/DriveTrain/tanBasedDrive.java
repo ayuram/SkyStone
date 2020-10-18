@@ -15,7 +15,7 @@ public class tanBasedDrive extends Robot {
             //input values
             x = gamepad1.left_stick_x;
             y = gamepad1.left_stick_y;
-            turn = gamepad1.right_stick_x;
+            turn = -gamepad1.right_stick_x;
 
             //find angle of joystick
             angle = Math.atan2(y,x);
