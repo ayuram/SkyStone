@@ -19,13 +19,14 @@ public class tanBasedLinear extends LinearOpMode {
 
         telemetry.addData("Status", "Initialized");
         waitForStart();
-        double x, y, turn, mag, angle, d1, d2;
+        //double x, y, turn, mag, angle, d1, d2;
 
         while(opModeIsActive()){
+            /*
             //input values
-            x = gamepad1.left_stick_x;
-            y = gamepad1.left_stick_y;
-            turn = -gamepad1.right_stick_x;
+            x = -gamepad1.left_stick_x;
+            y = -gamepad1.left_stick_y;
+            turn = gamepad1.right_stick_x;
 
             //find angle of joystick
             angle = Math.atan2(y,x);
@@ -53,7 +54,19 @@ public class tanBasedLinear extends LinearOpMode {
             br.setPower(d1);
             bl.setPower(d2);
             fr.setPower(d2);
+            */
+            double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
+            double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
+            double rightX = gamepad1.right_stick_x;
+            double v1 = r * Math.cos(robotAngle) + rightX;
+            double v2 = r * Math.sin(robotAngle) - rightX;
+            double v3 = r * Math.sin(robotAngle) + rightX;
+            double v4 = r * Math.cos(robotAngle) - rightX;
 
+            fl.setPower(v1);
+            fr.setPower(v2);
+            bl.setPower(v3);
+            br.setPower(v4);
         }
     }
 }
