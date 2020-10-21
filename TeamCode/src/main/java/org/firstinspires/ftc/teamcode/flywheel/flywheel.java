@@ -1,23 +1,24 @@
 package org.firstinspires.ftc.teamcode.flywheel;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
-
+@TeleOp(name="flywheel", group = "LinearOpMode")
 public class flywheel extends LinearOpMode{
 
     public DcMotor flywheel, flywheel1;
-    public Servo angler;
+    public Servo mag;
     public void runOpMode() throws InterruptedException {
         flywheel = hardwareMap.get(DcMotor.class, "fw");
         flywheel1 = hardwareMap.get(DcMotor.class, "fw1");
         flywheel.setDirection(DcMotor.Direction.REVERSE);
         flywheel.setDirection(DcMotor.Direction.REVERSE);
-        angler = hardwareMap.get(Servo.class, "angler");
+        mag = hardwareMap.get(Servo.class, "mag");
         //0.25, 0.5, x
-        angler.setPosition(0.25);
+        mag.setPosition(0.25);
         telemetry.addData("Init", true);
         telemetry.update();
 
@@ -35,11 +36,11 @@ public class flywheel extends LinearOpMode{
                 flywheel1.setPower(0);
             }
 
-            if(gamepad1.x==true && angler.getPosition()>0.35){
-                angler.setPosition(0.25);
+            if(gamepad1.x==true && mag.getPosition()>0.35){
+                mag.setPosition(0.25);
             }
-            else if(gamepad1.x==true && angler.getPosition()<0.35){
-                angler.setPosition(0.5);
+            else if(gamepad1.x==true && mag.getPosition()<0.35){
+                mag.setPosition(0.5);
             }
 
 
