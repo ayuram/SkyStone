@@ -23,10 +23,10 @@ public class WobbleArm extends LinearOpMode {
                 arm.setPower(-0.4);
             }
             else arm.setPower(0);
-            if(gamepad1.y == true){
+            if(gamepad1.a == true && grabber.getPosition()>0.85){
                 grabber.setPosition(0.69);
             }
-            else if(gamepad1.a == true){
+            else if(gamepad1.a == true && grabber.getPosition()<0.85){
                 grabber.setPosition(1);
             }
         }
