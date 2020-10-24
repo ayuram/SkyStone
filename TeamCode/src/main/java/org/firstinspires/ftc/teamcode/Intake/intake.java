@@ -22,6 +22,10 @@ public class intake extends LinearOpMode {
                 intakeL.setPower(-gamepad1.left_trigger);
                 intakeR.setPower(-gamepad1.left_trigger);
             }
+            else {
+                intakeL.setPower(0);
+                intakeR.setPower(0);
+            }
         }
     }
 }
