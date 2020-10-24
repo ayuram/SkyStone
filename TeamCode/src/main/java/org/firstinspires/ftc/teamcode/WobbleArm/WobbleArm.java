@@ -17,7 +17,7 @@ public class WobbleArm extends LinearOpMode {
 
         while(opModeIsActive()){
             if(gamepad1.left_bumper == true){
-                arm.setPower(0.4);
+                arm.setPower(1);
             }
             else if(gamepad1.right_bumper == true){
                 arm.setPower(-0.4);
