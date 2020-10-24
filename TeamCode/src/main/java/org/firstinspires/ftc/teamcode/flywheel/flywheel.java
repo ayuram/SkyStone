@@ -10,13 +10,14 @@ import com.qualcomm.robotcore.hardware.Servo;
 public class flywheel extends LinearOpMode{
 
     public DcMotor flywheel, flywheel1;
-    public Servo mag;
+    public Servo mag, flap;
     public void runOpMode() throws InterruptedException {
         flywheel = hardwareMap.get(DcMotor.class, "fw");
         flywheel1 = hardwareMap.get(DcMotor.class, "fw1");
         flywheel.setDirection(DcMotor.Direction.REVERSE);
         flywheel.setDirection(DcMotor.Direction.REVERSE);
         mag = hardwareMap.get(Servo.class, "mag");
+        flap = hardwareMap.get(Servo.class, "flap");
         //0.25, 0.5, x
         mag.setPosition(0.25);
         telemetry.addData("Init", true);

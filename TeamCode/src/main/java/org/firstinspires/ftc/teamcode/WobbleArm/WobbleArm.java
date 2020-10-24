@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode.WobbleArm;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+@TeleOp(name="wobbleArm", group = "LinearOpMode")
 public class WobbleArm extends LinearOpMode {
     public DcMotor arm;
     public Servo grabber;
