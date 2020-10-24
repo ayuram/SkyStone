@@ -19,42 +19,9 @@ public class tanBasedLinear extends LinearOpMode {
 
         telemetry.addData("Status", "Initialized");
         waitForStart();
-        //double x, y, turn, mag, angle, d1, d2;
-
+        boolean ninja = false;
         while(opModeIsActive()){
-            /*
-            //input values
-            x = -gamepad1.left_stick_x;
-            y = -gamepad1.left_stick_y;
-            turn = gamepad1.right_stick_x;
 
-            //find angle of joystick
-            angle = Math.atan2(y,x);
-
-            //find magnitude of joystick
-            mag = Math.sqrt(x*x + y*y);
-
-            //find the speed of frontLeft and backRight
-            d1 = Math.sin(angle-Math.PI/4) * mag + turn;
-            //find the speed of backLeft and frontRight
-            d2 = Math.sin(angle+Math.PI/4) * mag + turn;
-
-            //prevent going over 1
-            if(Math.abs(d1)>1){
-                d1 = d1/Math.abs(d1);
-                d2 = d2/Math.abs(d1);
-            }
-            else if(Math.abs(d2)>1){
-                d1 = d1/Math.abs(d2);
-                d2 = d2/Math.abs(d2);
-            }
-
-            //set power
-            fl.setPower(d1);
-            br.setPower(d1);
-            bl.setPower(d2);
-            fr.setPower(d2);
-            */
             double r = Math.hypot(gamepad1.left_stick_x, -gamepad1.left_stick_y);
             double robotAngle = Math.atan2(-gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
             double rightX = gamepad1.right_stick_x*0.8;
@@ -62,7 +29,18 @@ public class tanBasedLinear extends LinearOpMode {
             double v2 = r * Math.sin(robotAngle) - rightX;
             double v3 = r * Math.sin(robotAngle) + rightX;
             double v4 = r * Math.cos(robotAngle) - rightX;
-
+            if(ninja == false && gamepad1.a == true){
+                ninja = true;
+            }
+            else if(ninja == true && gamepad1.a == true){
+                ninja = false;
+            }
+            if(ninja==true){
+                v1 /= 0.5;
+                v2 /= 0.5;
+                v3 /= 0.5;
+                v4 /= 0.5;
+            }
             fl.setPower(v1);
             fr.setPower(v2);
             bl.setPower(v3);
