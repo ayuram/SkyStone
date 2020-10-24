@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class TeleOp {
 
     public DcMotor fl, fr, bl,br;
-
+    /*
     public void runOpMode() throws InterruptedException {
         fl = hardwareMap.get(DcMotor.class , "fl");
         bl = hardwareMap.get(DcMotor.class , "bl");
@@ -45,4 +45,6 @@ public class TeleOp {
             br.setPower(v4);
         }
     }
+    
+     */
 }
