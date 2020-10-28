@@ -20,6 +20,7 @@ public class tanBasedLinear extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         waitForStart();
         boolean ninja = false;
+        double lastTime = System.currentTimeMillis();
         while(opModeIsActive()){
 
             double r = Math.hypot(gamepad1.left_stick_x, -gamepad1.left_stick_y);
@@ -29,11 +30,13 @@ public class tanBasedLinear extends LinearOpMode {
             double v2 = r * Math.sin(robotAngle) - rightX;
             double v3 = r * Math.sin(robotAngle) + rightX;
             double v4 = r * Math.cos(robotAngle) - rightX;
-            if(ninja == false && gamepad1.a == true){
+            if(ninja == false && gamepad1.a == true && System.currentTimeMillis() >= lastTime + 300){
                 ninja = true;
+                lastTime = System.currentTimeMillis();
             }
-            else if(ninja == true && gamepad1.a == true){
+            else if(ninja == true && gamepad1.a == true && System.currentTimeMillis() >= lastTime + 300){
                 ninja = false;
+                lastTime = System.currentTimeMillis();
             }
             if(ninja==true){
                 v1 /= 0.5;
