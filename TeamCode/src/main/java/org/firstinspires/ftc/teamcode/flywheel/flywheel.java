@@ -15,7 +15,7 @@ public class flywheel extends LinearOpMode{
         flywheel = hardwareMap.get(DcMotor.class, "fw");
         flywheel1 = hardwareMap.get(DcMotor.class, "fw1");
         flywheel.setDirection(DcMotor.Direction.REVERSE);
-        flywheel.setDirection(DcMotor.Direction.REVERSE);
+        flywheel1.setDirection(DcMotor.Direction.REVERSE);
         mag = hardwareMap.get(Servo.class, "mag");
         flap = hardwareMap.get(Servo.class, "flap");
         //0.25, 0.5, x
