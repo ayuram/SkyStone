@@ -15,7 +15,7 @@ public class TeleOp extends LinearOpMode{
         br = hardwareMap.get(DcMotor.class , "br");
         intakeR = hardwareMap.get(DcMotor.class, "intakeR");
         intakeL = hardwareMap.get(DcMotor.class, "intakeL");
-        
+
         intakeR.setDirection(DcMotorSimple.Direction.FORWARD);
         intakeL.setDirection(DcMotorSimple.Direction.REVERSE);
         fl.setDirection(DcMotor.Direction.REVERSE);

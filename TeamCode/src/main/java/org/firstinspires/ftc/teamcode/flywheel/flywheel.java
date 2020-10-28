@@ -14,7 +14,7 @@ public class flywheel extends LinearOpMode{
     public void runOpMode() throws InterruptedException {
         flywheel = hardwareMap.get(DcMotor.class, "fw");
         flywheel1 = hardwareMap.get(DcMotor.class, "fw1");
-        flywheel.setDirection(DcMotor.Direction.REVERSE);
+        flywheel.setDirection(DcMotor.Direction.FORWARD);
         flywheel.setDirection(DcMotor.Direction.REVERSE);
         mag = hardwareMap.get(Servo.class, "mag");
         flap = hardwareMap.get(Servo.class, "flap");
@@ -43,11 +43,17 @@ public class flywheel extends LinearOpMode{
             else if(gamepad1.x==true && mag.getPosition()<0.35){
                 mag.setPosition(0.5);
             }
-
-
-
-
-
+            if(gamepad1.x == true){
+                flywheel.setPower(1);
+                flywheel1.setPower(1);
+                for(int i = 0; i<3; i++){
+                    mag.setPosition(0.25);
+                    wait(100);
+                    mag.setPosition(0.5);
+                    wait(100);
+                }
+            }
         }
     }
+
 }
