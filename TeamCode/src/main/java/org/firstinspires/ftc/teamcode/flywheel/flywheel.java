@@ -44,7 +44,10 @@ public class flywheel extends LinearOpMode{
             while(gamepad1.x == true && i<3){
                 mag.setPosition(0.25);
                 mag.setPosition(0.5);
+
                 i++;
+                telemetry.addData("i", i);
+                telemetry.update();
             }
         }
     }
