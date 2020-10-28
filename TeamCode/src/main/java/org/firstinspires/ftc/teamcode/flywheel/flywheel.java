@@ -32,6 +32,18 @@ public class flywheel extends LinearOpMode{
                 flywheel.setPower(1);
                 flywheel1.setPower(1);
             }
+            else if(gamepad1.x == true){
+                flywheel.setPower(1);
+                flywheel1.setPower(1);
+                for(int i = 0; i<3; i++){
+                    mag.setPosition(0.25);
+                    wait(100);
+                    mag.setPosition(0.5);
+                    wait(100);
+                }
+                flywheel.setPower(0);
+                flywheel1.setPower(0);
+            }
             else{
                 flywheel.setPower(0);
                 flywheel1.setPower(0);
@@ -43,16 +55,7 @@ public class flywheel extends LinearOpMode{
             else if(gamepad1.x==true && mag.getPosition()<0.35){
                 mag.setPosition(0.5);
             }
-            if(gamepad1.x == true){
-                flywheel.setPower(1);
-                flywheel1.setPower(1);
-                for(int i = 0; i<3; i++){
-                    mag.setPosition(0.25);
-                    wait(100);
-                    mag.setPosition(0.5);
-                    wait(100);
-                }
-            }
+
         }
     }
 
