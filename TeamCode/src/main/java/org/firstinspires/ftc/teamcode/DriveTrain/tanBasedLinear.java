@@ -39,10 +39,10 @@ public class tanBasedLinear extends LinearOpMode {
                 lastTime = System.currentTimeMillis();
             }
             if(ninja==true){
-                v1 /= 0.5;
-                v2 /= 0.5;
-                v3 /= 0.5;
-                v4 /= 0.5;
+                v1 /= 0.1;
+                v2 /= 0.1;
+                v3 /= 0.1;
+                v4 /= 0.1;
             }
             fl.setPower(v1);
             fr.setPower(v2);
