@@ -38,13 +38,7 @@ public class flywheel extends LinearOpMode{
                 flywheel1.setPower(0);
             }
 
-            if(gamepad1.b==true && mag.getPosition()>0.35){
-                mag.setPosition(0.25);
-            }
-            else if(gamepad1.b==true && mag.getPosition()<0.35){
-                mag.setPosition(0.5);
-            }
-            else if(gamepad1.x == true){
+            if(gamepad1.x == true){
                 for(int i = 0; i<3; i++){
                     mag.setPosition(0.25);
                     mag.setPosition(0.5);
