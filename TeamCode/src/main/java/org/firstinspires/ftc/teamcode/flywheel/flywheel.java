@@ -37,9 +37,7 @@ public class flywheel extends LinearOpMode{
                 flywheel1.setPower(1);
                 for(int i = 0; i<3; i++){
                     mag.setPosition(0.25);
-                    wait(100);
                     mag.setPosition(0.5);
-                    wait(100);
                 }
                 flywheel.setPower(0);
                 flywheel1.setPower(0);
