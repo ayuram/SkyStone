@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Hardware;
 
 public class Launcher {
     final double V = 50; // random value rn
@@ -9,26 +12,46 @@ public class Launcher {
 
     public Servo angle;
     public DcMotor launchWheel;
-    public double height;
+    public double launcherHeight;
+    public double h;
     public double theta;
 
+    HardwareMap map;
+    DcMotor.RunMode newRun;
 
+    public Launcher(DcMotor.RunMode runMode, HardwareMap imported, double launcherHeight){
+        map = imported;
+        newRun = runMode;
+        this.launcherHeight = launcherHeight;
 
-    public void findAngle(double x, double y, double goalX, double goalY, double h){
+        launchWheel = map.dcMotor.get("launchWheel");
+        angle = map.servo.get("angle");
+
+        launchWheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        launchWheel.setMode(newRun);
+        launchWheel.setDirection(DcMotorSimple.Direction.FORWARD);
+    }
+
+    public void findAngle(double x, double y, double goalX, double goalY){
         double d = Math.hypot(Math.abs(x-goalX), Math.abs(y-goalY));
+        y -= launcherHeight;
+
         double theta;
-        double sinplus = (d+Math.sqrt(d*d + ((4*g*d*d)/(2*V*V)) - 4*h))/-2;
-        double sinminus = (d-Math.sqrt(d*d + ((4*g*d*d)/(2*V*V)) - 4*h))/-2;
-        if(sinplus > 1 || sinplus < -1){
-            theta = Math.asin(sinminus);
+        double sinPlus = (d+Math.sqrt(d*d + ((4*g*d*d)/(2*V*V)) - 4*h))/-2;
+        double sinMinus = (d-Math.sqrt(d*d + ((4*g*d*d)/(2*V*V)) - 4*h))/-2;
+        if(sinPlus > 1 || sinPlus < -1){
+            theta = Math.asin(sinMinus);
         }
-        else if(sinminus > 1 || sinminus < -1){
-            theta = Math.asin(sinplus);
+        else if(sinMinus > 1 || sinMinus < -1){
+            theta = Math.asin(sinPlus);
         }
         else{
-            theta = Math.min(Math.asin(sinminus), Math.asin(sinplus));
+            theta = Math.min(Math.asin(sinMinus), Math.asin(sinPlus));
         }
 
         this.theta = theta;
     }
+
+
+
 }
