@@ -28,11 +28,11 @@ public class flywheel extends LinearOpMode{
 
         while(opModeIsActive()){
 
-            if(gamepad1.right_trigger>0.1){
+            if(gamepad2.right_trigger>0.1){
                 flywheel.setPower(1);
                 flywheel1.setPower(1);
             }
-            else if(gamepad1.left_trigger >0.1){
+            else if(gamepad2.left_trigger >0.1){
                 flywheel.setPower(-1);
                 flywheel1.setPower(-1);
             }
@@ -40,14 +40,12 @@ public class flywheel extends LinearOpMode{
                 flywheel.setPower(0);
                 flywheel1.setPower(0);
             }
-            int i = 0;
-            while(gamepad1.x == true && i<3){
+            if(gamepad2.left_bumper==true){
+                flap.setPosition(1);
+            }
+            if(gamepad2.x==true){
                 mag.setPosition(0.25);
                 mag.setPosition(0.5);
-
-                i++;
-                telemetry.addData("i", i);
-                telemetry.update();
             }
         }
     }
