@@ -13,7 +13,7 @@ public class Launcher {
     public Servo angle;
     public DcMotor launchWheel;
     public double launcherHeight;
-    public double h;
+    public double goalHeight;
     public double theta;
 
     HardwareMap map;
@@ -32,11 +32,11 @@ public class Launcher {
         launchWheel.setDirection(DcMotorSimple.Direction.FORWARD);
     }
 
-    public void findAngle(double x, double y, double goalX, double goalY){
-        double d = Math.hypot(Math.abs(x-goalX), Math.abs(y-goalY));
-        y -= launcherHeight;
 
-        double theta;
+    public void findAngle(double x, double y, double goalX, double goalY){
+        double h = goalHeight - launcherHeight;
+        double d = Math.hypot(Math.abs(x-goalX), Math.abs(y-goalY));
+
         double sinPlus = (d+Math.sqrt(d*d + ((4*g*d*d)/(2*V*V)) - 4*h))/-2;
         double sinMinus = (d-Math.sqrt(d*d + ((4*g*d*d)/(2*V*V)) - 4*h))/-2;
         if(sinPlus > 1 || sinPlus < -1){
@@ -49,7 +49,7 @@ public class Launcher {
             theta = Math.min(Math.asin(sinMinus), Math.asin(sinPlus));
         }
 
-        this.theta = theta;
+        angle.setPosition(theta/90);
     }
 
 
