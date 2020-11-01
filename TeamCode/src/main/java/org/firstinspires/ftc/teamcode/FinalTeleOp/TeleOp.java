@@ -12,7 +12,7 @@ public class TeleOp extends LinearOpMode{
     public DcMotor intakeR, intakeL;
     public DcMotor flywheel, flywheel1;
     public Servo mag, flap;
-    public CRServo in1, in2;
+    public Servo in1, in2;
     public void runOpMode() throws InterruptedException {
         fl = hardwareMap.get(DcMotor.class , "fl");
         bl = hardwareMap.get(DcMotor.class , "bl");
@@ -20,8 +20,8 @@ public class TeleOp extends LinearOpMode{
         br = hardwareMap.get(DcMotor.class , "br");
         intakeR = hardwareMap.get(DcMotor.class, "intakeR");
         intakeL = hardwareMap.get(DcMotor.class, "intakeL");
-        in1 = hardwareMap.get(CRServo.class, "in1");
-        in2 = hardwareMap.get(CRServo.class, "in2");
+        in1 = hardwareMap.get(Servo.class, "in1");
+        in2 = hardwareMap.get(Servo.class, "in2");
         intakeR.setDirection(DcMotorSimple.Direction.FORWARD);
         intakeL.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -70,20 +70,20 @@ public class TeleOp extends LinearOpMode{
             if(gamepad1.right_trigger > 0.01){
                 intakeL.setPower(-gamepad1.right_trigger);
                 intakeR.setPower(-gamepad1.right_trigger);
-                in1.setPower(1);
-                in2.setPower(0);
+                in1.setPosition(0);
+                in2.setPosition(0);
             }
             else if(gamepad1.left_trigger > 0.01){
                 intakeL.setPower(gamepad1.left_trigger);
                 intakeR.setPower(gamepad1.left_trigger);
-                in1.setPower(0);
-                in2.setPower(1);
+                in1.setPosition(1);
+                in2.setPosition(1);
             }
             else {
                 intakeL.setPower(0);
                 intakeR.setPower(0);
-                in1.setPower(0.5);
-                in2.setPower(0.5);
+                in1.setPosition(0.5);
+                in2.setPosition(0.5);
             }
             if(gamepad2.right_trigger>0.1){
                 flywheel.setPower(1);
