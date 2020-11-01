@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.FinalTeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -11,6 +12,7 @@ public class TeleOp extends LinearOpMode{
     public DcMotor intakeR, intakeL;
     public DcMotor flywheel, flywheel1;
     public Servo mag, flap;
+    public CRServo in1, in2;
     public void runOpMode() throws InterruptedException {
         fl = hardwareMap.get(DcMotor.class , "fl");
         bl = hardwareMap.get(DcMotor.class , "bl");
@@ -18,9 +20,11 @@ public class TeleOp extends LinearOpMode{
         br = hardwareMap.get(DcMotor.class , "br");
         intakeR = hardwareMap.get(DcMotor.class, "intakeR");
         intakeL = hardwareMap.get(DcMotor.class, "intakeL");
-
+        in1 = hardwareMap.get(CRServo.class, "in1");
+        in2 = hardwareMap.get(CRServo.class, "in2");
         intakeR.setDirection(DcMotorSimple.Direction.FORWARD);
         intakeL.setDirection(DcMotorSimple.Direction.REVERSE);
+
         fl.setDirection(DcMotor.Direction.REVERSE);
         bl.setDirection(DcMotor.Direction.REVERSE);
 
@@ -64,16 +68,22 @@ public class TeleOp extends LinearOpMode{
             bl.setPower(v3);
             br.setPower(v4);
             if(gamepad1.right_trigger > 0.01){
-                intakeL.setPower(gamepad1.right_trigger);
-                intakeR.setPower(gamepad1.right_trigger);
+                intakeL.setPower(-gamepad1.right_trigger);
+                intakeR.setPower(-gamepad1.right_trigger);
+                in1.setPower(1);
+                in2.setPower(0);
             }
             else if(gamepad1.left_trigger > 0.01){
-                intakeL.setPower(-gamepad1.left_trigger);
-                intakeR.setPower(-gamepad1.left_trigger);
+                intakeL.setPower(gamepad1.left_trigger);
+                intakeR.setPower(gamepad1.left_trigger);
+                in1.setPower(0);
+                in2.setPower(1);
             }
             else {
                 intakeL.setPower(0);
                 intakeR.setPower(0);
+                in1.setPower(0.5);
+                in2.setPower(0.5);
             }
             if(gamepad2.right_trigger>0.1){
                 flywheel.setPower(1);
