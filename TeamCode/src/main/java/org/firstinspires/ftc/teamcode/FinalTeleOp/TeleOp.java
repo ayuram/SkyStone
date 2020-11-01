@@ -40,15 +40,16 @@ public class TeleOp extends LinearOpMode{
         waitForStart();
         boolean ninja = false, reverse = false;
         double lastTime = System.currentTimeMillis();
+        double multiplier = 1;
         while(opModeIsActive()){
 
             double r = Math.hypot(gamepad1.left_stick_x, -gamepad1.left_stick_y);
             double robotAngle = Math.atan2(-gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
             double rightX = gamepad1.right_stick_x*0.8;
-            double v1 = r * Math.cos(robotAngle) + rightX;
-            double v2 = r * Math.sin(robotAngle) - rightX;
-            double v3 = r * Math.sin(robotAngle) + rightX;
-            double v4 = r * Math.cos(robotAngle) - rightX;
+            double v1 = r * Math.cos(robotAngle)*multiplier + rightX;
+            double v2 = r * Math.sin(robotAngle)*multiplier - rightX;
+            double v3 = r * Math.sin(robotAngle)*multiplier + rightX;
+            double v4 = r * Math.cos(robotAngle)*multiplier - rightX;
             if(ninja == false && gamepad1.a == true && System.currentTimeMillis() >= lastTime + 300){
                 ninja = true;
                 lastTime = System.currentTimeMillis();
@@ -72,10 +73,10 @@ public class TeleOp extends LinearOpMode{
                 v4 /= 3;
             }
             if(reverse==true){
-                v1*=-1;
-                v2*=-1;
-                v3*=-1;
-                v4*=-1;
+                multiplier = -1;
+            }
+            else{
+                multiplier = 1;
             }
             fl.setPower(v1);
             fr.setPower(v2);
