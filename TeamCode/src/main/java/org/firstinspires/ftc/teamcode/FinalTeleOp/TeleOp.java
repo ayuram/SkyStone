@@ -70,13 +70,13 @@ public class TeleOp extends LinearOpMode{
             if(gamepad1.right_trigger > 0.01){
                 intakeL.setPower(-gamepad1.right_trigger);
                 intakeR.setPower(-gamepad1.right_trigger);
-                in1.setPosition(0);
+                in1.setPosition(1);
                 in2.setPosition(0);
             }
             else if(gamepad1.left_trigger > 0.01){
                 intakeL.setPower(gamepad1.left_trigger);
                 intakeR.setPower(gamepad1.left_trigger);
-                in1.setPosition(1);
+                in1.setPosition(0);
                 in2.setPosition(1);
             }
             else {
