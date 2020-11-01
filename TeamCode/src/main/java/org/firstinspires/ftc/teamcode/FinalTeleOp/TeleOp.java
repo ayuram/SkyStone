@@ -38,7 +38,7 @@ public class TeleOp extends LinearOpMode{
         mag.setPosition(0.25);
         telemetry.addData("Status", "Initialized");
         waitForStart();
-        boolean ninja = false;
+        boolean ninja = false, reverse = false;
         double lastTime = System.currentTimeMillis();
         while(opModeIsActive()){
 
@@ -57,11 +57,25 @@ public class TeleOp extends LinearOpMode{
                 ninja = false;
                 lastTime = System.currentTimeMillis();
             }
+            if(reverse == false && gamepad1.b == true && System.currentTimeMillis() >= lastTime + 300){
+                reverse = true;
+                lastTime = System.currentTimeMillis();
+            }
+            else if(reverse == true && gamepad1.b == true && System.currentTimeMillis() >= lastTime + 300){
+                reverse = false;
+                lastTime = System.currentTimeMillis();
+            }
             if(ninja==true){
                 v1 /= 3;
                 v2 /= 3;
                 v3 /= 3;
                 v4 /= 3;
+            }
+            if(reverse==true){
+                v1*=-1;
+                v2*=-1;
+                v3*=-1;
+                v4*=-1;
             }
             fl.setPower(v1);
             fr.setPower(v2);
