@@ -11,7 +11,7 @@ public class TeleOp extends LinearOpMode{
     public DcMotor fl, fr, bl,br;
     public DcMotor intakeR, intakeL;
     public DcMotor flywheel, flywheel1;
-    public Servo mag, flap;
+    public Servo mag, flap, tilt;
     public Servo in1, in2;
     public void runOpMode() throws InterruptedException {
         fl = hardwareMap.get(DcMotor.class , "fl");
@@ -22,6 +22,7 @@ public class TeleOp extends LinearOpMode{
         intakeL = hardwareMap.get(DcMotor.class, "intakeL");
         in1 = hardwareMap.get(Servo.class, "in1");
         in2 = hardwareMap.get(Servo.class, "in2");
+
         intakeR.setDirection(DcMotorSimple.Direction.FORWARD);
         intakeL.setDirection(DcMotorSimple.Direction.REVERSE);
 
@@ -34,6 +35,7 @@ public class TeleOp extends LinearOpMode{
         flywheel1.setDirection(DcMotor.Direction.REVERSE);
         mag = hardwareMap.get(Servo.class, "mag");
         flap = hardwareMap.get(Servo.class, "flap");
+        tilt = hardwareMap.get(Servo.class, "tilt");
         //0.25, 0.5, x
         mag.setPosition(0.25);
         telemetry.addData("Status", "Initialized");
@@ -99,11 +101,11 @@ public class TeleOp extends LinearOpMode{
                 in1.setPosition(0.5);
                 in2.setPosition(0.5);
             }
-            if(gamepad2.right_trigger>0.1){
+            if(gamepad1.right_trigger>0.1){
                 flywheel.setPower(1);
                 flywheel1.setPower(1);
             }
-            else if(gamepad2.left_trigger >0.1){
+            else if(gamepad1.left_trigger >0.1){
                 flywheel.setPower(-1);
                 flywheel1.setPower(-1);
             }
@@ -111,12 +113,15 @@ public class TeleOp extends LinearOpMode{
                 flywheel.setPower(0);
                 flywheel1.setPower(0);
             }
-            if(gamepad2.left_bumper==true){
-                flap.setPosition(1);
-            }
-            if(gamepad2.x==true){
-                mag.setPosition(0.25);
-                mag.setPosition(0.5);
+            int i = 0;
+            while(gamepad1.x && i<3){
+                if(i == 0) tilt.setPosition(0.55);
+                mag.setPosition(0);
+                mag.setPosition(0.3);
+                i++;
+                telemetry.addData("i", i);
+                telemetry.update();
+                if(i == 2) tilt.setPosition(0.45);
             }
         }
     }
