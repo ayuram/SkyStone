@@ -117,8 +117,8 @@ public class TeleOp extends LinearOpMode{
             int i = 0;
             while(gamepad2.x && i<3){
                 if(i == 0) tilt.setPosition(0.55);
-                mag.setPosition(0);
                 mag.setPosition(0.3);
+                mag.setPosition(0);
                 i++;
                 telemetry.addData("i", i);
                 telemetry.update();
