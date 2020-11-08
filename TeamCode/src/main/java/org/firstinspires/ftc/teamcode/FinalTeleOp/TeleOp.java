@@ -37,7 +37,7 @@ public class TeleOp extends LinearOpMode{
         flap = hardwareMap.get(Servo.class, "flap");
         tilt = hardwareMap.get(Servo.class, "tilt");
         //0.25, 0.5, x
-        mag.setPosition(0);
+        mag.setPosition(0.3);
         tilt.setPosition(0.45);
         telemetry.addData("Status", "Initialized");
         waitForStart();
@@ -120,8 +120,8 @@ public class TeleOp extends LinearOpMode{
                 int i = 0;
                 while(i<3){
                     if(i == 0) tilt.setPosition(0.55);
-                    mag.setPosition(0.3);
                     mag.setPosition(0);
+                    mag.setPosition(0.3);
                     i++;
                     telemetry.addData("i", i);
                     telemetry.update();
