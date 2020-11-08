@@ -102,11 +102,11 @@ public class TeleOp extends LinearOpMode{
                 in1.setPosition(0.5);
                 in2.setPosition(0.5);
             }
-            if(gamepad1.right_trigger>0.1){
+            if(gamepad2.right_trigger>0.1){
                 flywheel.setPower(1);
                 flywheel1.setPower(1);
             }
-            else if(gamepad1.left_trigger >0.1){
+            else if(gamepad2.left_trigger >0.1){
                 flywheel.setPower(-1);
                 flywheel1.setPower(-1);
             }
@@ -115,7 +115,7 @@ public class TeleOp extends LinearOpMode{
                 flywheel1.setPower(0);
             }
             int i = 0;
-            while(gamepad1.x && i<3){
+            while(gamepad2.x && i<3){
                 if(i == 0) tilt.setPosition(0.55);
                 mag.setPosition(0);
                 mag.setPosition(0.3);
