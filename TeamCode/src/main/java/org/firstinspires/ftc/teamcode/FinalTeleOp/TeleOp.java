@@ -132,7 +132,7 @@ public class TeleOp extends LinearOpMode{
             if(gamepad2.x == true){
                 int i = 0;
                 while(i<3){
-                    if(i == 0) tilt.setPosition(0.55);
+                    if(i == 0) tilt.setPosition(0.58);
                     mag.setPosition(0.4);
                     sleep(500);
                     mag.setPosition(0);
