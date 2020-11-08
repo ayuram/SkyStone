@@ -119,8 +119,8 @@ public class TeleOp extends LinearOpMode{
             if(gamepad2.dpad_up==true){
                 pos+=0.05;
             }
-            else(gamepad2.dpad_down==true){
-                pos-=0.05;
+            else if(gamepad2.dpad_down){
+                pos -= 0.05;
             }
             if(pos>1){
                 pos=1;
