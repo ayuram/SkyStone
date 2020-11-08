@@ -115,7 +115,20 @@ public class TeleOp extends LinearOpMode{
                 flywheel.setPower(0);
                 flywheel1.setPower(0);
             }
-
+            int pos = 0;
+            if(gamepad2.dpad_up==true){
+                pos+=0.05;
+            }
+            else(gamepad2.dpad_down==true){
+                pos-=0.05;
+            }
+            if(pos>1){
+                pos=1;
+            }
+            else if(pos<0){
+                pos=0;
+            }
+            flap.setPosition(pos);
             if(gamepad2.x == true){
                 int i = 0;
                 while(i<3){
