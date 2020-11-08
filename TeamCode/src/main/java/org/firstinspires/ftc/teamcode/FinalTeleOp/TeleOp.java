@@ -38,6 +38,7 @@ public class TeleOp extends LinearOpMode{
         tilt = hardwareMap.get(Servo.class, "tilt");
         //0.25, 0.5, x
         mag.setPosition(0.25);
+        tilt.setPosition(0.45);
         telemetry.addData("Status", "Initialized");
         waitForStart();
         boolean ninja = false, reverse = false;
