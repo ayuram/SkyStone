@@ -134,7 +134,9 @@ public class TeleOp extends LinearOpMode{
                 while(i<3){
                     if(i == 0) tilt.setPosition(0.55);
                     mag.setPosition(0.4);
+                    sleep(500);
                     mag.setPosition(0);
+                    sleep(500);
                     i++;
                     telemetry.addData("i", i);
                     telemetry.update();
