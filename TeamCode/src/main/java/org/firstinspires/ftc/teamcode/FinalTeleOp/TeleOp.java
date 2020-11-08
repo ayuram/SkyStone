@@ -114,16 +114,22 @@ public class TeleOp extends LinearOpMode{
                 flywheel.setPower(0);
                 flywheel1.setPower(0);
             }
-            int i = 0;
-            while(gamepad2.x && i<3){
-                if(i == 0) tilt.setPosition(0.55);
-                mag.setPosition(0.3);
-                mag.setPosition(0);
-                i++;
-                telemetry.addData("i", i);
-                telemetry.update();
-                if(i == 2) tilt.setPosition(0.45);
+
+            if(gamepad2.x == true){
+                int i = 0;
+                while(i<3){
+                    if(i == 0) tilt.setPosition(0.55);
+                    mag.setPosition(0.3);
+                    mag.setPosition(0);
+                    i++;
+                    telemetry.addData("i", i);
+                    telemetry.update();
+                    if(i == 2) tilt.setPosition(0.45);
+                }
+
+
             }
+
         }
     }
 
