@@ -116,7 +116,7 @@ public class TeleOp extends LinearOpMode{
                 flywheel1.setPower(0);
             }
             int pos = 0;
-            if(gamepad2.dpad_up==true){
+            if(gamepad2.dpad_up){
                 pos+=0.05;
             }
             else if(gamepad2.dpad_down){
@@ -140,7 +140,7 @@ public class TeleOp extends LinearOpMode{
                     i++;
                     telemetry.addData("i", i);
                     telemetry.update();
-                    if(i == 2) tilt.setPosition(0.5);
+                    if(i == 3) tilt.setPosition(0.5);
                 }
             }
 
