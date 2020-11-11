@@ -38,7 +38,8 @@ public class TeleOp extends LinearOpMode{
         tilt = hardwareMap.get(Servo.class, "tilt");
         //0.25, 0.5, x
         mag.setPosition(0);
-        tilt.setPosition(0.49);
+        tilt.setPosition(0.1);
+        flap.setPosition(1);
         telemetry.addData("Status", "Initialized");
         waitForStart();
         boolean ninja = false, reverse = false;
@@ -115,7 +116,8 @@ public class TeleOp extends LinearOpMode{
                 flywheel.setPower(0);
                 flywheel1.setPower(0);
             }
-            int pos = 0;
+            /*
+            double pos = flap.getPosition ();
             if(gamepad2.dpad_up){
                 pos+=0.05;
             }
@@ -129,18 +131,24 @@ public class TeleOp extends LinearOpMode{
                 pos=0;
             }
             flap.setPosition(pos);
+
+             */
             if(gamepad2.x == true){
                 int i = 0;
                 while(i<3){
-                    if(i == 0) tilt.setPosition(0.57);
-                    mag.setPosition(0.4);
+                    if(i == 0){
+                        tilt.setPosition(0.315);
+                        sleep(400);
+                    }
+
+                    mag.setPosition(0.2);
                     sleep(500);
                     mag.setPosition(0);
                     sleep(500);
                     i++;
                     telemetry.addData("i", i);
                     telemetry.update();
-                    if(i == 3) tilt.setPosition(0.5);
+                    if(i == 3) tilt.setPosition(0.1);
                 }
             }
 
