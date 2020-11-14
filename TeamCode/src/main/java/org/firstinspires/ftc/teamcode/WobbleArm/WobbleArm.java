@@ -7,27 +7,35 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp(name="wobbleArm", group = "LinearOpMode")
 public class WobbleArm extends LinearOpMode {
-    public DcMotor arm;
+    public Servo arm1, arm2;
     public Servo grabber;
     public void runOpMode() throws InterruptedException {
-        arm = hardwareMap.get(DcMotor.class, "wobbleArm");
+        arm1 = hardwareMap.get(Servo.class, "wobbleArm1");
+        arm2 = hardwareMap.get(Servo.class, "wobbleArm2");
+        arm1.setDirection( Servo.Direction.REVERSE);
+        arm1.setPosition(0.05);
+        arm2.setPosition ( 0.9 );
         grabber = hardwareMap.get(Servo.class, "wobbleGrabber");
+        grabber.setPosition(0.58);
+
 
         waitForStart();
 
         while(opModeIsActive()){
             if(gamepad1.left_bumper == true){
-                arm.setPower(1);
+                arm1.setPosition(0.9);
+                arm2.setPosition ( 0.05 );
             }
             else if(gamepad1.right_bumper == true){
-                arm.setPower(-0.4);
+                arm1.setPosition(0.05);
+                arm2.setPosition ( 0.9 );
             }
-            else arm.setPower(0);
-            if(gamepad1.a == true && grabber.getPosition()>0.85){
-                grabber.setPosition(0.51);
+
+            if(gamepad1.y == true && grabber.getPosition()>0.8){
+                grabber.setPosition(0.58);
             }
-            else if(gamepad1.a == true && grabber.getPosition()<0.85){
-                grabber.setPosition(1);
+            else if(gamepad1.y == true && grabber.getPosition()<0.8){
+                grabber.setPosition(0.9);
             }
         }
     }

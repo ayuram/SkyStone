@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name="TeleOp", group = "LinearOpMode")
-public class TeleOp extends LinearOpMode{
+public class TeleOpTest extends LinearOpMode{
 
     public DcMotor fl, fr, bl,br;
     public DcMotor intakeR, intakeL;
