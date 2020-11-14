@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 public class Coordinate {
-    private double x;
-    private double y;
+    public double x;
+    public double y;
 
     public Coordinate(double x, double y) {
         this.x = x;
@@ -23,7 +23,13 @@ public class Coordinate {
         this.x = point.getX();
         this.y = point.getY();
     }
+    public Coordinate clone() {
+        return new Coordinate(x, y);
+    }
 
+    public double dot(Coordinate p) {
+        return x * p.x + y * p.y;
+    }
     public void setX(double x) {
         this.x = x;
     }
