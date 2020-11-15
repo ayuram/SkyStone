@@ -46,7 +46,7 @@ public class TeleOpFinal extends LinearOpMode {
         //0.25, 0.5, x
         mag.setPosition(0);
         tilt.setPosition(0.1);
-        flap.setPosition(0);
+        flap.setPosition(0.04);
         telemetry.addData("Status", "Initialized");
         waitForStart();
         boolean ninja = false, reverse = false, magUp = false;
@@ -131,7 +131,7 @@ public class TeleOpFinal extends LinearOpMode {
                 flapUp = true;
             }
             else if(gamepad2.b==true && flapUp == true){
-                flap.setPosition(0);
+                flap.setPosition(0.04);
                 flapUp = false;
             }
 
