@@ -101,30 +101,27 @@ public class TeleOpFinal extends LinearOpMode {
                 in2.setPosition(0.5);
             }
             if(gamepad2.b==true && flapUp == false){
-                flap.setPosition(0.25);
+                flap.setPosition(0.1);
                 flapUp = true;
             }
             else if(gamepad2.b==true && flapUp == true){
                 flap.setPosition(0);
                 flapUp = false;
             }
-           if(gamepad2.left_bumper == true &&magUp == false){
-                magUp = true;
-                tilt.setPosition(0.313);
-            }
-            else if(gamepad2.left_bumper == true && magUp==true){
-                magUp = false;
+
+            if(gamepad2.right_bumper==true){
+
+                sleep(400);
+                mag.setPosition(0.2);
+                sleep(300);
+                mag.setPosition(0);
+                sleep(300);
                 tilt.setPosition(0.1);
             }
-            if(gamepad2.left_bumper==true){
-                mag.setPosition(0.2);
-                wait(300);
-                mag.setPosition(0);
-            }
             if(gamepad2.left_trigger >=0.1){
+                tilt.setPosition(0.32);
                 flywheel.setPower(-1);
                 flywheel1.setPower(-1);
-                tilt.setPosition(0.313);
             }
             else{
                 tilt.setPosition(0.1);
@@ -135,10 +132,6 @@ public class TeleOpFinal extends LinearOpMode {
             if(gamepad2.right_trigger >= 0.1){
                 int i = 0;
                 while(i<3){
-                    if(i == 0){
-                        tilt.setPosition(0.313);
-                        sleep(400);
-                    }
 
                     mag.setPosition(0.2);
                     sleep(500);
@@ -147,7 +140,7 @@ public class TeleOpFinal extends LinearOpMode {
                     i++;
                     telemetry.addData("i", i);
                     telemetry.update();
-                    if(i == 3) tilt.setPosition(0.1);
+
                 }
             }
 
