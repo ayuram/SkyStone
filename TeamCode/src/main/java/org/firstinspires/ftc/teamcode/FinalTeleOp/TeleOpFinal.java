@@ -11,13 +11,15 @@ public class TeleOpFinal extends LinearOpMode {
     public DcMotor flywheel, flywheel1;
     public Servo mag, flap, tilt;
     public Servo in1, in2;
+    public Servo arm1, arm2;
+    public Servo grabber;
     public void runOpMode() throws InterruptedException {
-        fl = hardwareMap.get(DcMotor.class , "fl");
-        bl = hardwareMap.get(DcMotor.class , "bl");
-        fr = hardwareMap.get(DcMotor.class , "fr");
-        br = hardwareMap.get(DcMotor.class , "br");
-        intakeR = hardwareMap.get(DcMotor.class, "intakeR");
-        intakeL = hardwareMap.get(DcMotor.class, "intakeL");
+        fl = hardwareMap.get(DcMotor.class , "fl"); //green
+        bl = hardwareMap.get(DcMotor.class , "bl"); //red
+        fr = hardwareMap.get(DcMotor.class , "fr"); //blue
+        br = hardwareMap.get(DcMotor.class , "br"); //white
+        intakeR = hardwareMap.get(DcMotor.class, "intakeR"); //green
+        intakeL = hardwareMap.get(DcMotor.class, "intakeL"); //red
         in1 = hardwareMap.get(Servo.class, "in1");
         in2 = hardwareMap.get(Servo.class, "in2");
 
@@ -27,13 +29,20 @@ public class TeleOpFinal extends LinearOpMode {
         fl.setDirection(DcMotor.Direction.REVERSE);
         bl.setDirection(DcMotor.Direction.REVERSE);
 
-        flywheel = hardwareMap.get(DcMotor.class, "fw");
-        flywheel1 = hardwareMap.get(DcMotor.class, "fw1");
+        flywheel = hardwareMap.get(DcMotor.class, "fw");//black
+        flywheel1 = hardwareMap.get(DcMotor.class, "fw1");//silver
         flywheel.setDirection(DcMotor.Direction.REVERSE);
         flywheel1.setDirection(DcMotor.Direction.REVERSE);
         mag = hardwareMap.get(Servo.class, "mag");
         flap = hardwareMap.get(Servo.class, "flap");
         tilt = hardwareMap.get(Servo.class, "tilt");
+        arm1 = hardwareMap.get(Servo.class, "wobbleArm1");
+        arm2 = hardwareMap.get(Servo.class, "wobbleArm2");
+        arm1.setDirection( Servo.Direction.REVERSE);
+        arm1.setPosition(0.05);
+        arm2.setPosition ( 0.9 );
+        grabber = hardwareMap.get(Servo.class, "wobbleGrabber");
+        grabber.setPosition(0.58);
         //0.25, 0.5, x
         mag.setPosition(0);
         tilt.setPosition(0.1);
@@ -41,7 +50,7 @@ public class TeleOpFinal extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         waitForStart();
         boolean ninja = false, reverse = false, magUp = false;
-        boolean flapUp = false;
+        boolean flapUp = false, armUp = false;
         double lastTime = System.currentTimeMillis();
         double multiplier = 1;
         while(opModeIsActive()){
@@ -53,19 +62,19 @@ public class TeleOpFinal extends LinearOpMode {
             double v2 = r * Math.sin(robotAngle)*multiplier - rightX;
             double v3 = r * Math.sin(robotAngle)*multiplier + rightX;
             double v4 = r * Math.cos(robotAngle)*multiplier - rightX;
-            if(ninja == false && gamepad1.a == true && System.currentTimeMillis() >= lastTime + 300){
+            if(ninja == false && gamepad1.left_bumper == true && System.currentTimeMillis() >= lastTime + 300){
                 ninja = true;
                 lastTime = System.currentTimeMillis();
             }
-            else if(ninja == true && gamepad1.a == true && System.currentTimeMillis() >= lastTime + 300){
+            else if(ninja == true && gamepad1.left_bumper == true && System.currentTimeMillis() >= lastTime + 300){
                 ninja = false;
                 lastTime = System.currentTimeMillis();
             }
-            if(reverse == false && gamepad1.b == true && System.currentTimeMillis() >= lastTime + 300){
+            if(reverse == false && gamepad1.right_bumper == true && System.currentTimeMillis() >= lastTime + 300){
                 reverse = true;
                 lastTime = System.currentTimeMillis();
             }
-            else if(reverse == true && gamepad1.b == true && System.currentTimeMillis() >= lastTime + 300){
+            else if(reverse == true && gamepad1.right_bumper == true && System.currentTimeMillis() >= lastTime + 300){
                 reverse = false;
                 lastTime = System.currentTimeMillis();
             }
@@ -85,6 +94,23 @@ public class TeleOpFinal extends LinearOpMode {
             fr.setPower(v2);
             bl.setPower(v3);
             br.setPower(v4);
+            if(gamepad2.a == true && armUp == false){
+                arm1.setPosition(0.9);
+                arm2.setPosition ( 0.05 );
+                armUp = true;
+            }
+            else if(gamepad2.a == true && armUp == true){
+                arm1.setPosition(0.05);
+                arm2.setPosition ( 0.9 );
+                armUp = false;
+            }
+
+            if(gamepad2.y == true && grabber.getPosition()>0.8){
+                grabber.setPosition(0.58);
+            }
+            else if(gamepad2.y == true && grabber.getPosition()<0.8){
+                grabber.setPosition(0.9);
+            }
             double intakeSpeed = -gamepad2.right_stick_y;
             intakeL.setPower(intakeSpeed);
             intakeR.setPower(intakeSpeed);
@@ -101,7 +127,7 @@ public class TeleOpFinal extends LinearOpMode {
                 in2.setPosition(0.5);
             }
             if(gamepad2.b==true && flapUp == false){
-                flap.setPosition(0.1);
+                flap.setPosition(0.05);
                 flapUp = true;
             }
             else if(gamepad2.b==true && flapUp == true){
