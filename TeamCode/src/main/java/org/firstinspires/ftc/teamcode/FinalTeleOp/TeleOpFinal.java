@@ -20,60 +20,14 @@ public class TeleOpFinal extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
 
         initialize();
-
         waitForStart();
 
         while(opModeIsActive()){
 
             drive();
-
             wobbleArm();
-
             intake();
-
-            if(gamepad2.b==true && flapUp == false){
-                flap.setPosition(0.05);
-                flapUp = true;
-            }
-            else if(gamepad2.b==true && flapUp == true){
-                flap.setPosition(0.04);
-                flapUp = false;
-            }
-
-            if(gamepad2.right_bumper==true){
-
-                sleep(400);
-                mag.setPosition(0.2);
-                sleep(300);
-                mag.setPosition(0);
-                sleep(300);
-                tilt.setPosition(0.1);
-            }
-            if(gamepad2.left_trigger >=0.1){
-                tilt.setPosition(0.32);
-                flywheel.setPower(-1);
-                flywheel1.setPower(-1);
-            }
-            else{
-                tilt.setPosition(0.1);
-                flywheel.setPower(0);
-                flywheel1.setPower(0);
-
-            }
-            if(gamepad2.right_trigger >= 0.1){
-                int i = 0;
-                while(i<3){
-
-                    mag.setPosition(0.2);
-                    sleep(500);
-                    mag.setPosition(0);
-                    sleep(500);
-                    i++;
-                    telemetry.addData("i", i);
-                    telemetry.update();
-
-                }
-            }
+            shooter();
 
         }
     }
@@ -188,6 +142,51 @@ public class TeleOpFinal extends LinearOpMode {
         else{
             in1.setPosition(0.5);
             in2.setPosition(0.5);
+        }
+    }
+    public void shooter(){
+        if(gamepad2.b==true && flapUp == false){
+            flap.setPosition(0.05);
+            flapUp = true;
+        }
+        else if(gamepad2.b==true && flapUp == true){
+            flap.setPosition(0.04);
+            flapUp = false;
+        }
+
+        if(gamepad2.right_bumper==true){
+
+            sleep(400);
+            mag.setPosition(0.2);
+            sleep(300);
+            mag.setPosition(0);
+            sleep(300);
+            tilt.setPosition(0.1);
+        }
+        if(gamepad2.left_trigger >=0.1){
+            tilt.setPosition(0.32);
+            flywheel.setPower(-1);
+            flywheel1.setPower(-1);
+        }
+        else{
+            tilt.setPosition(0.1);
+            flywheel.setPower(0);
+            flywheel1.setPower(0);
+
+        }
+        if(gamepad2.right_trigger >= 0.1){
+            int i = 0;
+            while(i<3){
+
+                mag.setPosition(0.2);
+                sleep(500);
+                mag.setPosition(0);
+                sleep(500);
+                i++;
+                telemetry.addData("i", i);
+                telemetry.update();
+
+            }
         }
     }
 }
