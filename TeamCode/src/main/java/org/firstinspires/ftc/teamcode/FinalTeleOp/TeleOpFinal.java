@@ -157,14 +157,14 @@ public class TeleOpFinal extends LinearOpMode {
         if(gamepad2.right_bumper==true){
 
             sleep(400);
-            mag.setPosition(0.2);
+            mag.setPosition(0.32);
             sleep(300);
             mag.setPosition(0);
             sleep(300);
             tilt.setPosition(0.1);
         }
         if(gamepad2.left_trigger >=0.1){
-            tilt.setPosition(0.32);
+            tilt.setPosition(0.318);
             flywheel.setPower(-1);
             flywheel1.setPower(-1);
         }
@@ -178,7 +178,7 @@ public class TeleOpFinal extends LinearOpMode {
             int i = 0;
             while(i<3){
 
-                mag.setPosition(0.2);
+                mag.setPosition(0.32);
                 sleep(500);
                 mag.setPosition(0);
                 sleep(500);
