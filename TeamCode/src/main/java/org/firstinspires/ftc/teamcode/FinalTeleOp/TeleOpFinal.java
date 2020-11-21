@@ -64,7 +64,7 @@ public class TeleOpFinal extends LinearOpMode {
         //0.25, 0.5, x
         mag.setPosition(0);
         tilt.setPosition(0.1);
-        flap.setPosition(0.04);
+        flap.setPosition(0);
         telemetry.addData("Status", "Initialized");
     }
     public void drive(){
@@ -111,19 +111,19 @@ public class TeleOpFinal extends LinearOpMode {
     public void wobbleArm(){
         if(gamepad2.a == true && armUp == false){
             arm1.setPosition(0.9);
-            arm2.setPosition ( 0.05 );
+            arm2.setPosition (0.05);
             armUp = true;
         }
         else if(gamepad2.a == true && armUp == true){
-            arm1.setPosition(0.05);
-            arm2.setPosition ( 0.9 );
+            arm1.setPosition(0.1);
+            arm2.setPosition (0.9);
             armUp = false;
         }
 
-        if(gamepad2.y == true && grabber.getPosition()>0.8){
+        if(gamepad2.x == true && grabber.getPosition()>0.7){
             grabber.setPosition(0.58);
         }
-        else if(gamepad2.y == true && grabber.getPosition()<0.8){
+        else if(gamepad2.x == true && grabber.getPosition()<0.7){
             grabber.setPosition(0.9);
         }
     }
@@ -145,12 +145,12 @@ public class TeleOpFinal extends LinearOpMode {
         }
     }
     public void shooter(){
-        if(gamepad2.b==true && flapUp == false){
-            flap.setPosition(0.05);
+        if(gamepad2.y==true && flapUp == false){
+            flap.setPosition(0.06);
             flapUp = true;
         }
-        else if(gamepad2.b==true && flapUp == true){
-            flap.setPosition(0.04);
+        else if(gamepad2.y==true && flapUp == true){
+            flap.setPosition(0);
             flapUp = false;
         }
 
