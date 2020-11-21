@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.Odometry;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,7 +15,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 public class GlobalCoordinatePositionUpdateSample extends LinearOpMode {
     //Odometry encoder wheels
     DcMotor verticalRight, verticalLeft, horizontal;
-
+    BNO055IMU imu;
     //The amount of encoder ticks for each inch the robot moves. This will change for each robot and needs to be changed here
     //final double COUNTS_PER_INCH = 307.699557;
     final double COUNTS_PER_INCH = 768;
@@ -49,6 +51,24 @@ public class GlobalCoordinatePositionUpdateSample extends LinearOpMode {
         horizontal.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         //Init complete
+        imu = hardwareMap.get(BNO055IMU.class, "imu");
+
+        //Initialize IMU parameters
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+        parameters.loggingEnabled      = true;
+        parameters.loggingTag          = "IMU";
+        parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+        imu.initialize(parameters);
+        telemetry.addData("Odometry System Calibration Status", "IMU Init Complete");
+        telemetry.clear();
+
+        //Odometry System Calibration Init Complete
+        telemetry.addData("Odometry System Calibration Status", "Init Complete");
+        telemetry.update();
+
         telemetry.addData("Status", "Init Complete");
         telemetry.update();
         waitForStart();
@@ -71,7 +91,7 @@ public class GlobalCoordinatePositionUpdateSample extends LinearOpMode {
             telemetry.addData("Left", verticalLeft.getCurrentPosition());
             telemetry.addData("Right", verticalRight.getCurrentPosition());
             telemetry.addData("Horizontal", horizontal.getCurrentPosition());
-            telemetry.addData("Orientation (Degrees)", globalPositionUpdate.returnOrientation());
+            telemetry.addData("Orientation (Degrees)", imu.getAngularOrientation().firstAngle);//globalPositionUpdate.returnOrientation());
             telemetry.addData("Thread Active", positionThread.isAlive());
             telemetry.update();
         }
