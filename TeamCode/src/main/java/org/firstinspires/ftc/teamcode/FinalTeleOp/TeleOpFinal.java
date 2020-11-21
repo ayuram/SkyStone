@@ -29,6 +29,7 @@ public class TeleOpFinal extends LinearOpMode {
             intake();
             shooter();
 
+            telemetry.update();
         }
     }
     public void initialize(){
@@ -142,6 +143,9 @@ public class TeleOpFinal extends LinearOpMode {
         else{
             in1.setPosition(0.5);
             in2.setPosition(0.5);
+        }
+        if(intakeSpeed!=0){
+            telemetry.addData ("Intake", "on");
         }
     }
     public void shooter(){
