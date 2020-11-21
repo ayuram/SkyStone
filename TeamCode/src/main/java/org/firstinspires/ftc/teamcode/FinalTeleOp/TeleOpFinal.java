@@ -57,8 +57,8 @@ public class TeleOpFinal extends LinearOpMode {
         arm1 = hardwareMap.get(Servo.class, "wobbleArm1");
         arm2 = hardwareMap.get(Servo.class, "wobbleArm2");
         arm1.setDirection( Servo.Direction.REVERSE);
-        arm1.setPosition(0.05);
-        arm2.setPosition ( 0.9 );
+        arm1.setPosition(0.92);
+        arm2.setPosition (0.92);
         grabber = hardwareMap.get(Servo.class, "wobbleGrabber");
         grabber.setPosition(0.58);
         //0.25, 0.5, x
@@ -110,13 +110,13 @@ public class TeleOpFinal extends LinearOpMode {
     }
     public void wobbleArm(){
         if(gamepad2.a == true && armUp == false){
-            arm1.setPosition(0.9);
-            arm2.setPosition (0.05);
+            arm1.setPosition(0.92);
+            arm2.setPosition (0.92);
             armUp = true;
         }
         else if(gamepad2.a == true && armUp == true){
-            arm1.setPosition(0.1);
-            arm2.setPosition (0.9);
+            arm1.setPosition(0.13);
+            arm2.setPosition (0.13);
             armUp = false;
         }
 
@@ -124,7 +124,7 @@ public class TeleOpFinal extends LinearOpMode {
             grabber.setPosition(0.58);
         }
         else if(gamepad2.x == true && grabber.getPosition()<0.7){
-            grabber.setPosition(0.9);
+            grabber.setPosition(1);
         }
     }
     public void intake(){
