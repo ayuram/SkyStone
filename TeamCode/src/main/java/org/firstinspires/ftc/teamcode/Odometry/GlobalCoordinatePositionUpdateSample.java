@@ -19,7 +19,7 @@ public class GlobalCoordinatePositionUpdateSample extends LinearOpMode {
     final double COUNTS_PER_INCH = 768;
 
     //Hardware map names for the encoder wheels. Again, these will change for each robot and need to be updated below
-    String verticalLeftEncoderName = "frontLeft", verticalRightEncoderName = "frontRight", horizontalEncoderName = "backRight";
+    String verticalLeftEncoderName = "fr", verticalRightEncoderName = "bl", horizontalEncoderName = "br";
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -66,8 +66,11 @@ public class GlobalCoordinatePositionUpdateSample extends LinearOpMode {
 
         while(opModeIsActive()){
             //Display Global (x, y, theta) coordinates
-            //telemetry.addData("X Position", globalPositionUpdate.getX() / COUNTS_PER_INCH);
-            //telemetry.addData("Y Position", globalPositionUpdate.getY() / COUNTS_PER_INCH);
+//            telemetry.addData("X Position", globalPositionUpdate.getX() / COUNTS_PER_INCH);
+//            telemetry.addData("Y Position", globalPositionUpdate.getY() / COUNTS_PER_INCH);
+            telemetry.addData("Left", verticalLeft.getCurrentPosition());
+            telemetry.addData("Right", verticalRight.getCurrentPosition());
+            telemetry.addData("Horizontal", horizontal.getCurrentPosition());
             telemetry.addData("Orientation (Degrees)", globalPositionUpdate.returnOrientation());
             telemetry.addData("Thread Active", positionThread.isAlive());
             telemetry.update();
