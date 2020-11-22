@@ -61,10 +61,10 @@ public class TeleOpFinal extends LinearOpMode {
         arm1.setPosition(0.92);
         arm2.setPosition (0.92);
         grabber = hardwareMap.get(Servo.class, "wobbleGrabber");
-        grabber.setPosition(0.58);
+        grabber.setPosition(0.92);
         //0.25, 0.5, x
         mag.setPosition(0);
-        tilt.setPosition(0.1);
+        tilt.setPosition(0.13);
         flap.setPosition(0);
         telemetry.addData("Status", "Initialized");
     }
@@ -122,10 +122,12 @@ public class TeleOpFinal extends LinearOpMode {
         }
 
         if(gamepad2.x == true && grabber.getPosition()>0.7){
-            grabber.setPosition(0.58);
+            grabber.setPosition(0.5);
+            sleep(100);
         }
         else if(gamepad2.x == true && grabber.getPosition()<0.7){
-            grabber.setPosition(1);
+            grabber.setPosition(0.92);
+            sleep(100);
         }
     }
     public void intake(){
@@ -151,21 +153,19 @@ public class TeleOpFinal extends LinearOpMode {
     public void shooter(){
         if(gamepad2.y==true && flapUp == false){
             flap.setPosition(0.06);
+            sleep(50);
             flapUp = true;
         }
         else if(gamepad2.y==true && flapUp == true){
             flap.setPosition(0);
+            sleep(50);
             flapUp = false;
         }
 
         if(gamepad2.right_bumper==true){
-
-            sleep(400);
             mag.setPosition(0.32);
-            sleep(300);
+            sleep(400);
             mag.setPosition(0);
-            sleep(300);
-            tilt.setPosition(0.1);
         }
         if(gamepad2.left_trigger >=0.1){
             tilt.setPosition(0.318);
@@ -173,7 +173,7 @@ public class TeleOpFinal extends LinearOpMode {
             flywheel1.setPower(-1);
         }
         else{
-            tilt.setPosition(0.1);
+            tilt.setPosition(0.13);
             flywheel.setPower(0);
             flywheel1.setPower(0);
 
@@ -183,9 +183,9 @@ public class TeleOpFinal extends LinearOpMode {
             while(i<3){
 
                 mag.setPosition(0.32);
-                sleep(500);
+                sleep(400);
                 mag.setPosition(0);
-                sleep(500);
+                sleep(400);
                 i++;
                 telemetry.addData("i", i);
                 telemetry.update();
